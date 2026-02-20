@@ -1,29 +1,29 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;600;800&display=swap');
 
 :root {
-  /* Colors - "Antigravity" Premium Dark Theme */
-  --bg-deep: #0a0514;
-  --bg-surface: #130a24;
-  --bg-surface-elevated: rgba(30, 15, 60, 0.4);
-  
-  --primary: #9d4edd;
-  --primary-glow: rgba(157, 78, 221, 0.5);
-  --secondary: #ff006e;
-  
-  --text-main: #f8f9fa;
-  --text-muted: #adb5bd;
-  
-  --border-subtle: rgba(255, 255, 255, 0.08);
-  
+  /* Colors - "Game Review Vault" Nordic Slate Premium Theme */
+  --bg-deep: #0f172a;
+  --bg-surface: #1e293b;
+  --bg-surface-elevated: rgba(30, 41, 59, 0.65);
+
+  --primary: #38bdf8;
+  --primary-glow: rgba(56, 189, 248, 0.3);
+  --secondary: #818cf8;
+
+  --text-main: #f8fafc;
+  --text-muted: #94a3b8;
+
+  --border-subtle: rgba(148, 163, 184, 0.15);
+
   /* Typography */
   --font-body: 'Inter', sans-serif;
   --font-heading: 'Outfit', sans-serif;
-  
+
   /* Utilities */
   --radius-sm: 8px;
   --radius-md: 16px;
   --radius-lg: 24px;
-  
+
   --transition-fast: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   --transition-smooth: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
@@ -69,7 +69,12 @@ body::after {
   z-index: -1;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-family: var(--font-heading);
   font-weight: 600;
   line-height: 1.2;
@@ -131,8 +136,27 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Text Gradients */
 .text-gradient {
-  background: linear-gradient(to right, #9d4edd, #ff006e);
+  background: linear-gradient(to right, var(--primary), var(--secondary));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+}
+
+/* Dynamic Game Themes */
+.theme-cyberpunk {
+  --primary: #fcee0a;
+  --secondary: #ff003c;
+  --primary-glow: rgba(252, 238, 10, 0.3);
+}
+
+.theme-eldenring {
+  --primary: #fbbf24;
+  --secondary: #b45309;
+  --primary-glow: rgba(251, 191, 36, 0.3);
+}
+
+.theme-gowr {
+  --primary: #0ea5e9;
+  --secondary: #1d4ed8;
+  --primary-glow: rgba(14, 165, 233, 0.3);
 }

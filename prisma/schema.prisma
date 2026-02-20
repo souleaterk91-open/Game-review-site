@@ -1,0 +1,88 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+enum Role {
+  USER
+  ADMIN
+}
+
+model User {
+  id        String    @id @default(cuid())
+  email     String    @unique
+  name      String?
+  role      Role      @default(USER)
+  createdAt DateTime  @default(now())
+  
+  // Relations
+  comments  Comment[]
+}
+
+model Game {
+  id                String   @id @default(cuid())
+  slug              String   @unique
+  title             String
+  releaseDate       DateTime
+  company           String
+  genre             String
+  coverImage        String
+
+  // Pre-Game Content specific fields stored on the game itself for simplicity
+  storyline         String
+  recommendedFor    String[]
+  notRecommendedFor String[]
+
+  // Relations
+  postReview        PostReview?
+  articles          Article[]
+}
+
+model PostReview {
+  id     String @id @default(cuid())
+  gameId String @unique
+  game   Game   @relation(fields: [gameId], references: [id], onDelete: Cascade)
+
+  // Multi-dimensional Rating System (Addresses Check #2)
+  storyScore      Int
+  storyComment    String
+  
+  graphicsScore   Int
+  graphicsComment String
+  
+  gameplayScore   Int
+  gameplayComment String
+  
+  qualityScore    Int
+  qualityComment  String
+  
+  totalScore      Float
+  overallReview   String
+}
+
+model Article {
+  id      String   @id @default(cuid())
+  gameId  String
+  game    Game     @relation(fields: [gameId], references: [id], onDelete: Cascade)
+  title   String
+  excerpt String
+  content String
+  
+  comments Comment[]
+}
+
+model Comment {
+  id        String   @id @default(cuid())
+  text      String
+  createdAt DateTime @default(now())
+  
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+  
+  articleId String
+  article   Article  @relation(fields: [articleId], references: [id], onDelete: Cascade)
+}
