@@ -1,34 +1,31 @@
 "use client";
 
-import { useParams, useSearchParams } from "next/navigation";
-import { useState, useEffect } from "react";
+import { useParams, useSearchParams, useRouter } from "next/navigation";
+import { useState } from "react";
+import Image from "next/image";
 import { MOCK_GAMEDATA } from "@/lib/mock-data";
 import "@/styles/components.css"; // We will rebuild this stylesheet
 
 export default function GameHubPage() {
     const params = useParams();
     const searchParams = useSearchParams();
+    const router = useRouter();
     const slug = params.slug as string;
     const modeParam = searchParams.get('mode');
 
     const game = MOCK_GAMEDATA[slug];
 
-    const [segment, setSegment] = useState<"pre" | "post">("pre");
+    const segment = modeParam === "post" ? "post" : "pre";
 
-    // Listen for the ?mode= URL parameter to auto-switch tabs
-    useEffect(() => {
-        if (modeParam === "post") {
-            setSegment("post");
-        } else if (modeParam === "pre") {
-            setSegment("pre");
-        }
-    }, [modeParam]);
+    const setSegment = (newSegment: "pre" | "post") => {
+        router.push(`/games/${slug}?mode=${newSegment}`, { scroll: false });
+    };
 
     if (!game) {
         return (
             <div className="container" style={{ padding: "100px", textAlign: "center" }}>
                 <h1>Game Not Found</h1>
-                <p>Sorry, the game you are looking for doesn't exist in our hub yet.</p>
+                <p>Sorry, the game you are looking for doesn&apos;t exist in our hub yet.</p>
             </div>
         );
     }
@@ -37,9 +34,16 @@ export default function GameHubPage() {
         <div className={`game-hub-page ${game.themeClass}`}>
             {/* Hero Header */}
             <header className="game-hero">
-                <div className="game-hero-overlay" />
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={game.coverImage} alt={game.name} className="game-hero-img" />
+                <div className="game-hero-img-container" style={{ position: 'absolute', inset: 0 }}>
+                    <Image
+                        src={game.coverImage}
+                        alt={game.name}
+                        fill
+                        priority
+                        style={{ objectFit: 'cover' }}
+                        className="game-hero-img"
+                    />
+                </div>
 
                 <div className="container game-hero-content">
                     <div className="game-meta-badges">

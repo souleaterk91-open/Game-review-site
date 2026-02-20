@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 
 type Theme = "quantum" | "ethereal" | "dynamic" | "slate" | "forest" | "crimson" | "clean" | "sand" | "pearl";
 
@@ -151,10 +152,15 @@ export default function ThemePreview() {
                         background: `linear-gradient(to top, ${current.bg}, transparent)`,
                         zIndex: 1
                     }} />
-                    <img
-                        src={`https://placehold.co/1200x600/${current.bg.replace('#', '')}/${current.primary.replace('#', '')}/?text=Cinematic+Hero+Preview`}
-                        style={{ width: "100%", height: "100%", objectFit: "cover" }}
-                    />
+                    <div style={{ position: "relative", width: "100%", height: "100%" }}>
+                        <Image
+                            src={`https://placehold.co/1200x600/${current.bg.replace('#', '')}/${current.primary.replace('#', '')}/?text=Cinematic+Hero+Preview`}
+                            alt="Cinematic Hero Preview"
+                            fill
+                            unoptimized
+                            style={{ objectFit: "cover" }}
+                        />
+                    </div>
                     <div style={{ position: "absolute", bottom: "30px", left: "30px", zIndex: 2 }}>
                         <h2 style={{ fontSize: "2.5rem", margin: 0 }}>The Future of <span style={{ color: current.primary, transition: "color 0.5s" }}>Gaming</span></h2>
                     </div>

@@ -1,7 +1,8 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 import { MOCK_GAMEDATA, GameHubData } from "@/lib/mock-data";
 
 export default function Home() {
@@ -11,7 +12,7 @@ export default function Home() {
   const [dailyPick, setDailyPick] = useState<GameHubData | null>(null);
   const [timeRemaining, setTimeRemaining] = useState<string>("");
 
-  const allGames = Object.values(MOCK_GAMEDATA);
+  const allGames = useMemo(() => Object.values(MOCK_GAMEDATA), []);
 
   // Daily Pick & Countdown Logic
   useEffect(() => {
@@ -50,7 +51,7 @@ export default function Home() {
     const interval = setInterval(calculateDailyPick, 1000);
 
     return () => clearInterval(interval);
-  }, []);
+  }, [allGames]);
 
   // Handle Search Input
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -97,7 +98,13 @@ export default function Home() {
       }}
     >
       <div style={{ position: 'relative', height: '180px' }}>
-        <img src={game.coverImage} alt={game.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+        <Image
+          src={game.coverImage}
+          alt={game.name}
+          fill
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+          style={{ objectFit: 'cover' }}
+        />
         <div style={{ position: 'absolute', top: '12px', right: '12px', display: 'flex', gap: '8px' }}>
           <span className="badge" style={{ background: 'rgba(0,0,0,0.8)', border: 'none' }}>
             ★ {game.ratings.total}
@@ -123,7 +130,7 @@ export default function Home() {
       {/* 1. Search Bar Section */}
       <section className="search-section" style={{ maxWidth: '700px', margin: '0 auto 60px auto', textAlign: 'center' }}>
         <h1 style={{ fontSize: '2.5rem', marginBottom: '16px' }}>Search the Vault, <span className="text-gradient">Find Your Game</span></h1>
-        <p style={{ color: 'var(--text-muted)', marginBottom: '30px' }}>Unlock spoiler-free impressions or deep-dive into the vault's analysis.</p>
+        <p style={{ color: 'var(--text-muted)', marginBottom: '30px' }}>Unlock spoiler-free impressions or deep-dive into the vault&apos;s analysis.</p>
         <input
           type="text"
           className="glass-panel"
@@ -142,7 +149,7 @@ export default function Home() {
             {filteredGames.length > 0 ? (
               filteredGames.map(game => renderGameCard(game))
             ) : (
-              <p style={{ color: 'var(--text-muted)' }}>No games found matching "{searchQuery}".</p>
+              <p style={{ color: 'var(--text-muted)' }}>No games found matching &quot;{searchQuery}&quot;.</p>
             )}
           </div>
         </section>
@@ -154,7 +161,7 @@ export default function Home() {
             <section className="fade-in">
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: '20px', borderBottom: '1px solid var(--border)', paddingBottom: '10px' }}>
                 <h2 style={{ display: 'flex', alignItems: 'center', gap: '8px', margin: 0 }}>
-                  <span style={{ color: 'var(--primary)', textShadow: '0 0 10px var(--primary-glow)' }}>✦</span> Today's Vault Pick
+                  <span style={{ color: 'var(--primary)', textShadow: '0 0 10px var(--primary-glow)' }}>✦</span> Today&apos;s Vault Pick
                 </h2>
                 <span className="badge" style={{ background: 'var(--bg-surface-elevated)', border: '1px solid var(--border-subtle)', color: 'var(--text-muted)', fontSize: '0.8rem' }}>
                   New pick in {timeRemaining}
@@ -178,7 +185,14 @@ export default function Home() {
                 }}
               >
                 <div style={{ width: '35%', height: '100%', minHeight: '200px', position: 'relative' }}>
-                  <img src={dailyPick.coverImage} alt={dailyPick.name} style={{ width: '100%', height: '100%', objectFit: 'cover', position: 'absolute', inset: 0 }} />
+                  <Image
+                    src={dailyPick.coverImage}
+                    alt={dailyPick.name}
+                    fill
+                    priority
+                    sizes="35vw"
+                    style={{ objectFit: 'cover' }}
+                  />
                   <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to right, transparent, rgba(15, 23, 42, 0.95))' }} />
                 </div>
 
