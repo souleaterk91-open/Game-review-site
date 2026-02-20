@@ -11,6 +11,7 @@ export default function Home() {
   const [selectedGame, setSelectedGame] = useState<string | null>(null);
   const [dailyPick, setDailyPick] = useState<GameHubData | null>(null);
   const [timeRemaining, setTimeRemaining] = useState<string>("");
+  const [isMounted, setIsMounted] = useState(false);
 
   const allGames = useMemo(() => Object.values(MOCK_GAMEDATA), []);
 
@@ -47,6 +48,7 @@ export default function Home() {
       );
     };
 
+    setIsMounted(true);
     calculateDailyPick();
     const interval = setInterval(calculateDailyPick, 1000);
 
@@ -102,6 +104,7 @@ export default function Home() {
           src={game.coverImage}
           alt={game.name}
           fill
+          unoptimized
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           style={{ objectFit: 'cover' }}
         />
@@ -157,7 +160,7 @@ export default function Home() {
         <div className="fade-in" style={{ display: 'flex', flexDirection: 'column', gap: '60px' }}>
 
           {/* Today's Pick Section */}
-          {dailyPick && (
+          {isMounted && dailyPick && (
             <section className="fade-in">
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: '20px', borderBottom: '1px solid var(--border)', paddingBottom: '10px' }}>
                 <h2 style={{ display: 'flex', alignItems: 'center', gap: '8px', margin: 0 }}>
@@ -190,6 +193,7 @@ export default function Home() {
                     alt={dailyPick.name}
                     fill
                     priority
+                    unoptimized
                     sizes="35vw"
                     style={{ objectFit: 'cover' }}
                   />

@@ -40,6 +40,7 @@ export default function GameHubPage() {
                         alt={game.name}
                         fill
                         priority
+                        unoptimized
                         style={{ objectFit: 'cover' }}
                         className="game-hero-img"
                     />
