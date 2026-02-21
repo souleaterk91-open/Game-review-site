@@ -43,6 +43,12 @@ export default async function RootLayout({
             <div className="navbar-actions" style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
               {session?.user ? (
                 <>
+                  {/* @ts-ignore - Role is added in auth callback */}
+                  {session.user.role === "ADMIN" && (
+                    <Link href="/admin" className="btn-outline" style={{ borderColor: 'var(--primary)', color: 'var(--primary)', padding: '6px 12px', fontSize: '0.9rem' }}>
+                      Admin Dashboard
+                    </Link>
+                  )}
                   <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                     {session.user.image ? (
                       <img src={session.user.image} alt={session.user.name || "User"} style={{ width: '36px', height: '36px', borderRadius: '50%', border: '2px solid var(--primary)' }} />

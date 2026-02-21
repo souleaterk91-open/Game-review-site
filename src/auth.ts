@@ -11,4 +11,13 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     session: {
         strategy: "database",
     },
+    callbacks: {
+        async session({ session, user }) {
+            if (session.user) {
+                // @ts-ignore - To be fixed via next-auth extension
+                session.user.role = user.role;
+            }
+            return session;
+        }
+    }
 })

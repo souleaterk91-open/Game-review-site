@@ -1,44 +1,39 @@
-"use client";
-
-import { Suspense } from "react";
-import { useParams, useSearchParams, useRouter } from "next/navigation";
 import Image from "next/image";
-import { MOCK_GAMEDATA } from "@/lib/mock-data";
+import Link from "next/link";
+import { PrismaClient } from "@prisma/client";
+import { notFound } from "next/navigation";
 import "@/styles/components.css";
 
-// Inner component that uses useSearchParams — must be wrapped in Suspense
-function GameHubContent() {
-    const params = useParams();
-    const searchParams = useSearchParams();
-    const router = useRouter();
-    const slug = params.slug as string;
-    const modeParam = searchParams.get('mode');
+const prisma = new PrismaClient();
 
-    const game = MOCK_GAMEDATA[slug];
-
+export default async function GameHubPage(props: {
+    params: Promise<{ slug: string }>;
+    searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
+}) {
+    const params = await props.params;
+    const searchParams = await props.searchParams;
+    const slug = params.slug;
+    const modeParam = searchParams.mode;
     const segment = modeParam === "post" ? "post" : "pre";
 
-    const setSegment = (newSegment: "pre" | "post") => {
-        router.push(`/games/${slug}?mode=${newSegment}`, { scroll: false });
-    };
+    // Fetch the game and its review from PostgreSQL
+    const game = await prisma.game.findUnique({
+        where: { slug },
+        include: { postReview: true },
+    });
 
     if (!game) {
-        return (
-            <div className="container" style={{ padding: "100px", textAlign: "center" }}>
-                <h1>Game Not Found</h1>
-                <p>Sorry, the game you are looking for doesn&apos;t exist in our hub yet.</p>
-            </div>
-        );
+        notFound();
     }
 
     return (
-        <div className={`game-hub-page ${game.themeClass}`}>
+        <div className={`game-hub-page theme-default`}>
             {/* Hero Header */}
             <header className="game-hero">
                 <div className="game-hero-img-container" style={{ position: 'absolute', inset: 0 }}>
                     <Image
                         src={game.coverImage}
-                        alt={game.name}
+                        alt={game.title}
                         fill
                         priority
                         unoptimized
@@ -52,25 +47,23 @@ function GameHubContent() {
                         <span className="badge">{game.genre}</span>
                         <span className="badge">{game.company}</span>
                     </div>
-                    <h1 className="game-title">{game.name}</h1>
-                    <p className="game-release-date">Released: {game.releaseDate}</p>
+                    <h1 className="game-title">{game.title}</h1>
+                    <p className="game-release-date">Released: {new Date(game.releaseDate).toLocaleDateString()}</p>
 
-                    {/* Main Toggle */}
+                    {/* Main Toggle (Server-side links) */}
                     <div className="hub-toggle-wrapper">
                         <div className={`hub-toggle-container mode-${segment}`}>
                             <div className="hub-toggle-slider" />
-                            <button
-                                className={`hub-toggle-btn ${segment === "pre" ? "active" : ""}`}
-                                onClick={() => setSegment("pre")}
-                            >
-                                Pre-Game (Spoiler-Free)
-                            </button>
-                            <button
-                                className={`hub-toggle-btn ${segment === "post" ? "active" : ""}`}
-                                onClick={() => setSegment("post")}
-                            >
-                                Post-Game (Deep Dive)
-                            </button>
+                            <Link href={`?mode=pre`} scroll={false} style={{ zIndex: 2, flex: 1, textDecoration: 'none' }}>
+                                <button className={`hub-toggle-btn ${segment === "pre" ? "active" : ""}`} style={{ width: '100%' }}>
+                                    Pre-Game (Spoiler-Free)
+                                </button>
+                            </Link>
+                            <Link href={`?mode=post`} scroll={false} style={{ zIndex: 2, flex: 1, textDecoration: 'none' }}>
+                                <button className={`hub-toggle-btn ${segment === "post" ? "active" : ""}`} style={{ width: '100%' }}>
+                                    Post-Game (Deep Dive)
+                                </button>
+                            </Link>
                         </div>
                     </div>
                 </div>
@@ -79,18 +72,6 @@ function GameHubContent() {
             <main className="container game-content-main">
                 {segment === "pre" ? (
                     <div className="fade-in">
-                        {/* Admin Controls Placeholder */}
-                        <div className="admin-controls-bar glass-panel" style={{ marginBottom: '24px', padding: '16px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderLeft: '4px solid var(--secondary)' }}>
-                            <div>
-                                <strong style={{ color: 'var(--secondary)' }}>Admin View</strong>
-                                <span style={{ marginLeft: '12px', color: 'var(--text-muted)', fontSize: '0.9rem' }}>You have permissions to edit this review.</span>
-                            </div>
-                            <div style={{ display: 'flex', gap: '12px' }}>
-                                <button className="btn-outline" style={{ padding: '8px 16px', fontSize: '0.9rem' }}>Edit Pre-Game Content</button>
-                                <button className="btn-outline" style={{ padding: '8px 16px', fontSize: '0.9rem', color: '#ff3366', borderColor: '#ff3366' }}>Delete Game</button>
-                            </div>
-                        </div>
-
                         <section className="glass-panel info-card">
                             <h2>General Storyline</h2>
                             <p>{game.storyline}</p>
@@ -113,78 +94,45 @@ function GameHubContent() {
                     </div>
                 ) : (
                     <div className="fade-in">
-                        {/* Admin Controls Placeholder */}
-                        <div className="admin-controls-bar glass-panel" style={{ marginBottom: '24px', padding: '16px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderLeft: '4px solid var(--secondary)' }}>
-                            <div>
-                                <strong style={{ color: 'var(--secondary)' }}>Admin View</strong>
-                                <span style={{ marginLeft: '12px', color: 'var(--text-muted)', fontSize: '0.9rem' }}>You have permissions to edit this review.</span>
-                            </div>
-                            <button className="btn-outline" style={{ padding: '8px 16px', fontSize: '0.9rem' }}>Edit Post-Game Review</button>
-                        </div>
-
-                        <h2>Detailed Evaluation</h2>
-                        <section className="rating-detailed-list">
-                            {[
-                                { label: "Story", key: "story" },
-                                { label: "Graphics", key: "graphics" },
-                                { label: "Gameplay", key: "gameplay" },
-                                { label: "Quality", key: "quality" }
-                            ].map((category) => {
-                                const ratingData = game.ratings[category.key as keyof typeof game.ratings];
-                                // TypeScript narrowing for our RatingCategory vs total
-                                if (typeof ratingData === 'number') return null;
-
-                                return (
-                                    <div key={category.key} className="glass-panel rating-detailed-card">
-                                        <div className="rating-card-header">
-                                            <h3 className="rating-label">{category.label}</h3>
-                                            <div className="rating-stars">
-                                                {[1, 2, 3, 4, 5].map(star => (
-                                                    <span key={star} style={{ color: star <= ratingData.score ? 'var(--primary)' : 'var(--bg-surface-elevated)' }}>★</span>
-                                                ))}
-                                                <span className="rating-value-small"> {ratingData.score}/5</span>
+                        {game.postReview ? (
+                            <>
+                                <h2>Detailed Evaluation</h2>
+                                <section className="rating-detailed-list">
+                                    {[
+                                        { label: "Story", score: game.postReview.storyScore, comment: game.postReview.storyComment },
+                                        { label: "Graphics", score: game.postReview.graphicsScore, comment: game.postReview.graphicsComment },
+                                        { label: "Gameplay", score: game.postReview.gameplayScore, comment: game.postReview.gameplayComment },
+                                        { label: "Quality", score: game.postReview.qualityScore, comment: game.postReview.qualityComment }
+                                    ].map((category, idx) => (
+                                        <div key={idx} className="glass-panel rating-detailed-card">
+                                            <div className="rating-card-header">
+                                                <h3 className="rating-label">{category.label}</h3>
+                                                <div className="rating-stars">
+                                                    {[1, 2, 3, 4, 5].map(star => (
+                                                        <span key={star} style={{ color: star <= category.score ? 'var(--primary)' : 'var(--bg-surface-elevated)' }}>★</span>
+                                                    ))}
+                                                    <span className="rating-value-small"> {category.score}/5</span>
+                                                </div>
                                             </div>
+                                            <p className="rating-comment">{category.comment}</p>
                                         </div>
-                                        <p className="rating-comment">{ratingData.comment}</p>
-                                    </div>
-                                );
-                            })}
-                        </section>
+                                    ))}
+                                </section>
 
-                        <section className="glass-panel verdict-box">
-                            <h2>Overall Verdict: <span className="text-gradient">{game.ratings.total}/5</span></h2>
-                            <p className="overall-review">{game.overallReview}</p>
-                        </section>
-
-                        <section className="analysis-feed">
-                            <h3>Endings &amp; Lore Analysis</h3>
-                            <div className="article-list">
-                                {game.analysisArticles.map(article => (
-                                    <div key={article.id} className="glass-panel article-item">
-                                        <h4>{article.title}</h4>
-                                        <p>{article.excerpt}</p>
-                                        <button className="btn-outline">Read Analysis</button>
-                                    </div>
-                                ))}
-                            </div>
-                        </section>
+                                <section className="glass-panel verdict-box">
+                                    <h2>Overall Verdict: <span className="text-gradient">{game.postReview.totalScore}/5</span></h2>
+                                    <p className="overall-review">{game.postReview.overallReview}</p>
+                                </section>
+                            </>
+                        ) : (
+                            <section className="glass-panel info-card" style={{ textAlign: "center", padding: "48px" }}>
+                                <h2>No Review Yet</h2>
+                                <p style={{ color: "var(--text-muted)" }}>This game is currently in the Pre-Game phase. A full review covers story, graphics, and gameplay once evaluated.</p>
+                            </section>
+                        )}
                     </div>
                 )}
             </main>
         </div>
-    );
-}
-
-// Outer page component wraps the inner in Suspense to satisfy the
-// useSearchParams() requirement in Next.js 14+
-export default function GameHubPage() {
-    return (
-        <Suspense fallback={
-            <div className="container" style={{ padding: "100px", textAlign: "center" }}>
-                <p style={{ color: 'var(--text-muted)' }}>Loading vault...</p>
-            </div>
-        }>
-            <GameHubContent />
-        </Suspense>
     );
 }
