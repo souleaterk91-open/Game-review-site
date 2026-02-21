@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import Link from "next/link";
 import "./globals.css";
 import "@/styles/pages.css";
 import "@/styles/components.css";
@@ -31,9 +32,11 @@ export default function RootLayout({
       >
         <nav id="main-navbar" className="glass-panel navbar">
           <div className="container navbar-inner">
-            <h2 className="navbar-brand">
-              Game Review <span className="text-gradient">Vault</span>
-            </h2>
+            <Link href="/" className="navbar-logo-link">
+              <h2 className="navbar-brand">
+                Game Review <span className="text-gradient">Vault</span>
+              </h2>
+            </Link>
             <div className="navbar-actions">
               <button id="btn-login" className="btn-outline">
                 Log in

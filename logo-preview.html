@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Review Vault Logo Options - Round 2</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@700&family=Orbitron:wght@700&family=Outfit:wght@700&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --quantum-bg: #05020a;
+            --quantum-cyan: #00f2ff;
+            --ethereal-bg: #0f051a;
+            --ethereal-purple: #9d4edd;
+            --nordic-bg: #0f172a;
+            --nordic-blue: #38bdf8;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #111;
+            color: white;
+            margin: 0;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 800px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        h1 {
+            font-size: 2rem;
+            opacity: 0.9;
+        }
+
+        p {
+            opacity: 0.6;
+        }
+
+        .logo-preview {
+            padding: 40px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .label {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            opacity: 0.5;
+            margin-bottom: 20px;
+        }
+
+        /* Logo Styles */
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .vault-icon {
+            width: 54px;
+            height: 54px;
+            flex-shrink: 0;
+        }
+
+        .logo-text {
+            font-size: 2.2rem;
+            font-weight: 700;
+            line-height: 1;
+            white-space: nowrap;
+        }
+
+        /* Specific Variants */
+        .variant-quantum {
+            background-color: var(--quantum-bg);
+        }
+
+        .variant-quantum .logo-text {
+            font-family: 'Orbitron', sans-serif;
+            color: white;
+        }
+
+        .variant-quantum .accent {
+            color: var(--quantum-cyan);
+        }
+
+        .variant-ethereal {
+            background-color: var(--ethereal-bg);
+        }
+
+        .variant-ethereal .logo-text {
+            font-family: 'Outfit', sans-serif;
+            color: white;
+        }
+
+        .variant-ethereal .accent {
+            color: var(--ethereal-purple);
+        }
+
+        .variant-nordic {
+            background-color: var(--nordic-bg);
+        }
+
+        .variant-nordic .logo-text {
+            font-family: 'Inter', sans-serif;
+            color: white;
+        }
+
+        .variant-nordic .accent {
+            color: var(--nordic-blue);
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <header>
+            <h1>Game Review Vault</h1>
+            <p>Vault-Themed Logo Concepts (No 'V' Character)</p>
+        </header>
+
+        <!-- Option 4: Mechanical Vault Wheel -->
+        <div class="label">Option 4: Mechanical Vault Wheel (Precision)</div>
+        <div class="logo-preview variant-quantum">
+            <div class="logo-container">
+                <svg class="vault-icon" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Outer Mechanical Ring -->
+                    <circle cx="50" cy="50" r="44" stroke="var(--quantum-cyan)" stroke-width="4" />
+                    <!-- Locking Pins/Gears -->
+                    <circle cx="50" cy="50" r="32" stroke="white" stroke-width="2" stroke-dasharray="4 8" />
+                    <!-- Central Vault Handle -->
+                    <circle cx="50" cy="50" r="12" fill="var(--quantum-cyan)" />
+                    <rect x="47" y="10" width="6" height="20" rx="3" fill="white" />
+                    <rect x="47" y="70" width="6" height="20" rx="3" fill="white" />
+                    <rect x="10" y="47" width="20" height="6" rx="3" fill="white" />
+                    <rect x="70" y="47" width="20" height="6" rx="3" fill="white" />
+                </svg>
+                <div class="logo-text">
+                    Game Review <span class="accent">Vault</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Option 5: Shielded Security Vault -->
+        <div class="label">Option 5: Shielded Security Vault (Protection)</div>
+        <div class="logo-preview variant-ethereal">
+            <div class="logo-container">
+                <svg class="vault-icon" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Shield Outline -->
+                    <path d="M50 5 L15 20 V50 C15 75 50 90 50 90 C50 90 85 75 85 50 V20 L50 5Z" stroke="white"
+                        stroke-width="4" stroke-linejoin="round" />
+                    <!-- Inner Vault Dial -->
+                    <circle cx="50" cy="48" r="22" stroke="var(--ethereal-purple)" stroke-width="6" />
+                    <path d="M50 34 V48 H64" stroke="white" stroke-width="4" stroke-linecap="round" />
+                    <circle cx="50" cy="48" r="4" fill="white" />
+                </svg>
+                <div class="logo-text">
+                    Game Review <span class="accent">Vault</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Option 6: Digital Hex Vault -->
+        <div class="label">Option 6: Digital Hex Vault (Gaming Tech)</div>
+        <div class="logo-preview variant-nordic">
+            <div class="logo-container">
+                <svg class="vault-icon" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Hexagonal Outer Shell -->
+                    <path d="M50 5 L89 27.5 V72.5 L50 95 L11 72.5 V27.5 L50 5Z" stroke="var(--nordic-blue)"
+                        stroke-width="6" stroke-linejoin="round" />
+                    <!-- Internal locking pattern -->
+                    <path d="M50 25 L50 40 M50 60 L50 75 M30 50 L42 50 M58 50 L70 50" stroke="white" stroke-width="4"
+                        stroke-linecap="round" />
+                    <circle cx="50" cy="50" r="8" stroke="white" stroke-width="3" />
+                </svg>
+                <div class="logo-text">
+                    Game<span class="accent">Review</span>Vault
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+
+</html>
