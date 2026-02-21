@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Key Cursor Options</title>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0f172a;
+            color: #f8fafc;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 40px;
+        }
+
+        .option-card {
+            background: rgba(30, 41, 59, 0.65);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(148, 163, 184, 0.15);
+            border-radius: 16px;
+            padding: 30px;
+            width: 100%;
+            max-width: 400px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .option-card:hover {
+            transform: scale(1.02);
+            border-color: #38bdf8;
+        }
+
+        .icon-container {
+            width: 64px;
+            height: 64px;
+            background: rgba(0, 0, 0, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 12px;
+        }
+
+        svg {
+            width: 48px;
+            height: 48px;
+        }
+
+        h3 {
+            margin: 0;
+            color: #38bdf8;
+        }
+
+        p {
+            margin: 0;
+            font-size: 0.9rem;
+            color: #94a3b8;
+        }
+
+        .cursor-preview {
+            border: 1px dashed #444;
+            padding: 20px;
+            width: 100%;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Select your Key Style</h1>
+    <p>Choose the variation that best fits the 'Game Review Vault' aesthetic.</p>
+
+    <!-- Option 1: Modern Minimalist -->
+    <div class="option-card"
+        style="cursor: url('data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%2232%22 height=%2232%22 viewBox=%220 0 32 32%22 fill=%22none%22 stroke=%22white%22 stroke-width=%222%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22><path d=%22M10 10a4 4 0 1 0 0 8 4 4 0 0 0 0-8zM14 14h10M20 14v4M24 14v4%22/></svg>'), auto;">
+        <div class="icon-container">
+            <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round">
+                <circle cx="7" cy="11" r="3" />
+                <path d="M10 11h9" />
+                <path d="M13 11v2" />
+                <path d="M16 11v2" />
+                <path d="M19 11v2" />
+            </svg>
+        </div>
+        <h3>Option 1: Modern Nordic</h3>
+        <p>Minimalist strokes, clean geometric head. High visibility and modern feel.</p>
+        <div class="cursor-preview">Hover here to test cursor</div>
+    </div>
+
+    <!-- Option 2: Sci-Fi Hex Vault -->
+    <div class="option-card"
+        style="cursor: url('data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%2232%22 height=%2232%22 viewBox=%220 0 32 32%22 fill=%22none%22 stroke=%22%2338bdf8%22 stroke-width=%222%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22><path d=%22M6 10l4-2 4 2v4l-4 2-4-2v-4zM14 12h12M20 12v4M24 12v4%22/></svg>'), auto;">
+        <div class="icon-container">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#38bdf8" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round">
+                <path d="M4 8l4-2 4 2v4l-4 2-4-2v-4z" />
+                <path d="M12 10h10" />
+                <path d="M16 10v3" />
+                <path d="M20 10v3" />
+            </svg>
+        </div>
+        <h3>Option 2: Sci-Fi Hex</h3>
+        <p>Hexagonal head with cyan tech accents. Matches the 'Vault' technologic aesthetic.</p>
+        <div class="cursor-preview">Hover here to test cursor</div>
+    </div>
+
+    <!-- Option 3: Elegant Antique -->
+    <div class="option-card"
+        style="cursor: url('data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%2232%22 height=%2232%22 viewBox=%220 0 32 32%22 fill=%22none%22 stroke=%22white%22 stroke-width=%221.5%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22><circle cx=%2210%22 cy=%2212%22 r=%224%22/><path d=%22M14 12h12M22 12v3M26 12v3M9 10v4M11 10v4%22/></svg>'), auto;">
+        <div class="icon-container">
+            <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round"
+                stroke-linejoin="round">
+                <circle cx="8" cy="12" r="4" />
+                <path d="M12 12h10" />
+                <path d="M18 12v4" />
+                <path d="M21 12v4" />
+                <path d="M7 10v4M9 10v4" />
+            </svg>
+        </div>
+        <h3>Option 3: Premium Skeleton</h3>
+        <p>Ornate head design, refined thin lines. Adds a sense of exclusivity and craftsmanship.</p>
+        <div class="cursor-preview">Hover here to test cursor</div>
+    </div>
+
+</body>
+
+</html>

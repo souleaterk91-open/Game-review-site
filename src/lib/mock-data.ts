@@ -77,7 +77,7 @@ export const MOCK_GAMEDATA: Record<string, GameHubData> = {
         releaseDate: "Feb 25, 2022",
         company: "FromSoftware",
         genre: "Action RPG",
-        coverImage: "/images/elden ring.jpg",
+        coverImage: "/images/elden-ring.jpg",
         views: 42100,
         updatedAt: "2023-10-01T12:00:00Z",
         themeClass: "theme-eldenring",

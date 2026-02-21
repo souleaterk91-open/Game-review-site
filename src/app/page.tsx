@@ -147,7 +147,7 @@ export default function Home() {
       {/* Dynamic Content Area */}
       {searchQuery ? (
         <section className="search-results fade-in">
-          <h2 style={{ marginBottom: '24px', borderBottom: '1px solid var(--border)', paddingBottom: '10px' }}>Search Results</h2>
+          <h2 style={{ marginBottom: '24px', borderBottom: '1px solid var(--border-subtle)', paddingBottom: '10px' }}>Search Results</h2>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: '24px' }}>
             {filteredGames.length > 0 ? (
               filteredGames.map(game => renderGameCard(game))
@@ -162,7 +162,7 @@ export default function Home() {
           {/* Today's Pick Section */}
           {isMounted && dailyPick && (
             <section className="fade-in">
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: '20px', borderBottom: '1px solid var(--border)', paddingBottom: '10px' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: '20px', borderBottom: '1px solid var(--border-subtle)', paddingBottom: '10px' }}>
                 <h2 style={{ display: 'flex', alignItems: 'center', gap: '8px', margin: 0 }}>
                   <span style={{ color: 'var(--primary)', textShadow: '0 0 10px var(--primary-glow)' }}>✦</span> Today&apos;s Vault Pick
                 </h2>
@@ -222,7 +222,7 @@ export default function Home() {
 
           {/* 2. Latest Updated Reviews */}
           <section>
-            <h2 style={{ marginBottom: '24px', borderBottom: '1px solid var(--border)', paddingBottom: '10px', display: 'flex', alignItems: 'center', gap: '8px' }}>
+            <h2 style={{ marginBottom: '24px', borderBottom: '1px solid var(--border-subtle)', paddingBottom: '10px', display: 'flex', alignItems: 'center', gap: '8px' }}>
               <span style={{ color: 'var(--primary)' }}>•</span> Latest Updated Reviews
             </h2>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: '24px' }}>
@@ -232,7 +232,7 @@ export default function Home() {
 
           {/* 3. Top Viewed Reviews */}
           <section>
-            <h2 style={{ marginBottom: '24px', borderBottom: '1px solid var(--border)', paddingBottom: '10px', display: 'flex', alignItems: 'center', gap: '8px' }}>
+            <h2 style={{ marginBottom: '24px', borderBottom: '1px solid var(--border-subtle)', paddingBottom: '10px', display: 'flex', alignItems: 'center', gap: '8px' }}>
               <span style={{ color: 'var(--secondary)' }}>★</span> Top Viewed Reviews
             </h2>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: '24px' }}>

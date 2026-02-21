@@ -1,12 +1,13 @@
 "use client";
 
+import { Suspense } from "react";
 import { useParams, useSearchParams, useRouter } from "next/navigation";
-import { useState } from "react";
 import Image from "next/image";
 import { MOCK_GAMEDATA } from "@/lib/mock-data";
-import "@/styles/components.css"; // We will rebuild this stylesheet
+import "@/styles/components.css";
 
-export default function GameHubPage() {
+// Inner component that uses useSearchParams — must be wrapped in Suspense
+function GameHubContent() {
     const params = useParams();
     const searchParams = useSearchParams();
     const router = useRouter();
@@ -138,7 +139,6 @@ export default function GameHubPage() {
                                         <div className="rating-card-header">
                                             <h3 className="rating-label">{category.label}</h3>
                                             <div className="rating-stars">
-                                                {/* Simple Star visualizer */}
                                                 {[1, 2, 3, 4, 5].map(star => (
                                                     <span key={star} style={{ color: star <= ratingData.score ? 'var(--primary)' : 'var(--bg-surface-elevated)' }}>★</span>
                                                 ))}
@@ -157,7 +157,7 @@ export default function GameHubPage() {
                         </section>
 
                         <section className="analysis-feed">
-                            <h3>Endings & Lore Analysis</h3>
+                            <h3>Endings &amp; Lore Analysis</h3>
                             <div className="article-list">
                                 {game.analysisArticles.map(article => (
                                     <div key={article.id} className="glass-panel article-item">
@@ -172,5 +172,19 @@ export default function GameHubPage() {
                 )}
             </main>
         </div>
+    );
+}
+
+// Outer page component wraps the inner in Suspense to satisfy the
+// useSearchParams() requirement in Next.js 14+
+export default function GameHubPage() {
+    return (
+        <Suspense fallback={
+            <div className="container" style={{ padding: "100px", textAlign: "center" }}>
+                <p style={{ color: 'var(--text-muted)' }}>Loading vault...</p>
+            </div>
+        }>
+            <GameHubContent />
+        </Suspense>
     );
 }
