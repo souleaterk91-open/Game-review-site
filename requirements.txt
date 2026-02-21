@@ -1,1 +1,21 @@
-# Project dependencies
+# Node.js Project Dependencies are defined in package.json.
+# This requirements.txt file exists to support any Python-based tooling,
+# testing or data processing scripts associated with the project.
+
+# Testing & Quality Assurance
+pytest
+pytest-cov
+
+# Standard Tools
+requests
+python-dotenv
+
+# ==========================================
+# AI AGENT DIRECTIVES & GUIDELINES
+# ==========================================
+# 1. TEST-DRIVEN APPROACH: Future AI agents MUST use a Test-Driven Approach
+#    (TDD) when working on this codebase to reduce errors. Write tests first!
+# 2. DOCUMENTATION MAINTENANCE: Always add to README.md or context.md
+#    as needed when making architectural, configuration, or feature changes.
+# 3. CODE COMPLETENESS: Never use placeholders. Output fully working code.
+# ==========================================
