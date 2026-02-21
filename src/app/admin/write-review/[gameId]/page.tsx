@@ -1,9 +1,8 @@
 "use client";
 
-import { useTransition, useState, useEffect } from "react";
+import { useTransition, useState } from "react";
 import { createPostReview } from "@/lib/actions";
 import { useRouter } from "next/navigation";
-import { PrismaClient } from "@prisma/client";
 
 // Note: In an ideal world we fetch the associated Game data serverside and pass it as a prop.
 // For the sake of this component, we'll keep it focused on the form submission.

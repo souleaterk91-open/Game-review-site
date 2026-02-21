@@ -10,7 +10,7 @@ export default async function AdminLayout({
 }) {
     const session = await auth();
 
-    // @ts-ignore
+    // @ts-expect-error - The role property is added in the auth callback
     if (!session || session?.user?.role !== "ADMIN") {
         redirect("/");
     }

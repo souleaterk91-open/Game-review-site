@@ -9,7 +9,7 @@ const prisma = new PrismaClient();
 // Helper to check admin status
 async function requireAdmin() {
     const session = await auth();
-    // @ts-ignore
+    // @ts-expect-error - NextAuth types do not include the custom role property yet
     if (!session || session.user?.role !== "ADMIN") {
         throw new Error("Unauthorized Access");
     }

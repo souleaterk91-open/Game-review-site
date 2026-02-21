@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import Link from "next/link";
+import Image from "next/image";
 import { auth, signIn, signOut } from "@/auth";
 import "./globals.css";
 import "@/styles/pages.css";
@@ -43,7 +44,7 @@ export default async function RootLayout({
             <div className="navbar-actions" style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
               {session?.user ? (
                 <>
-                  {/* @ts-ignore - Role is added in auth callback */}
+                  {/* @ts-expect-error - Role is added in auth callback */}
                   {session.user.role === "ADMIN" && (
                     <Link href="/admin" className="btn-outline" style={{ borderColor: 'var(--primary)', color: 'var(--primary)', padding: '6px 12px', fontSize: '0.9rem' }}>
                       Admin Dashboard
@@ -51,7 +52,7 @@ export default async function RootLayout({
                   )}
                   <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                     {session.user.image ? (
-                      <img src={session.user.image} alt={session.user.name || "User"} style={{ width: '36px', height: '36px', borderRadius: '50%', border: '2px solid var(--primary)' }} />
+                      <Image src={session.user.image} alt={session.user.name || "User"} width={36} height={36} style={{ width: '36px', height: '36px', borderRadius: '50%', border: '2px solid var(--primary)' }} />
                     ) : (
                       <div style={{ width: '36px', height: '36px', borderRadius: '50%', backgroundColor: 'var(--primary)', display: 'flex', justifyContent: 'center', alignItems: 'center', color: '#fff', fontWeight: 'bold' }}>
                         {session.user.name?.[0] || "U"}

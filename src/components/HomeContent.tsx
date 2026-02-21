@@ -27,6 +27,11 @@ export default function HomeContent({ initialGames }: { initialGames: GameData[]
 
     const allGames = useMemo(() => initialGames, [initialGames]);
 
+    useEffect(() => {
+        const timeout = setTimeout(() => setIsMounted(true), 0);
+        return () => clearTimeout(timeout);
+    }, []);
+
     // Daily Pick & Countdown Logic
     useEffect(() => {
         if (allGames.length === 0) return;
@@ -57,7 +62,6 @@ export default function HomeContent({ initialGames }: { initialGames: GameData[]
             );
         };
 
-        setIsMounted(true);
         calculateDailyPick();
         const interval = setInterval(calculateDailyPick, 1000);
 

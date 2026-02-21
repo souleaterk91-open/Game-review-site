@@ -14,7 +14,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     callbacks: {
         async session({ session, user }) {
             if (session.user) {
-                // @ts-ignore - To be fixed via next-auth extension
+                // @ts-expect-error - To be fixed via next-auth extension
                 session.user.role = user.role;
             }
             return session;
