@@ -242,27 +242,32 @@ export default function Home() {
         </div>
       )}
 
-      {/* Selection Modal (Pre vs Post) */}
+      {/* Selection Modal (Access the Vault) */}
       {selectedGame && (
-        <div className="modal-overlay fade-in" style={{ position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', backgroundColor: 'rgba(10, 5, 20, 0.85)', backdropFilter: 'blur(8px)', display: 'flex', justifyContent: 'center', alignItems: 'center', zIndex: 1000 }}>
-          <div className="glass-panel modal-content" style={{ padding: '40px', maxWidth: '500px', width: '90%', textAlign: 'center', position: 'relative', border: '1px solid var(--primary)' }}>
+        <div className="modal-overlay" style={{ position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', backgroundColor: 'rgba(10, 5, 20, 0.85)', backdropFilter: 'blur(12px)', display: 'flex', justifyContent: 'center', alignItems: 'center', zIndex: 1000 }}>
+          <div className="glass-panel modal-content vault-modal fade-in" style={{ padding: '40px', maxWidth: '500px', width: '90%', textAlign: 'center', position: 'relative' }}>
+            {/* Scanning Effect Overlay */}
+            <div className="scan-line" />
+
             <button
               onClick={() => setSelectedGame(null)}
-              style={{ position: 'absolute', top: '16px', right: '20px', background: 'transparent', border: 'none', color: 'var(--text-muted)', fontSize: '2rem', cursor: 'pointer' }}
+              style={{ position: 'absolute', top: '16px', right: '20px', background: 'transparent', border: 'none', color: 'var(--text-muted)', fontSize: '2rem', cursor: 'pointer', zIndex: 10 }}
             >
               &times;
             </button>
-            <h2 style={{ marginBottom: '10px' }}>Choose Your Path</h2>
-            <p style={{ color: 'var(--text-muted)', marginBottom: '30px' }}>What kind of experience are you looking for?</p>
+            <h2 style={{ marginBottom: '10px', letterSpacing: '2px', textTransform: 'uppercase' }}>Access the Vault</h2>
+            <p style={{ color: 'var(--primary)', marginBottom: '30px', fontSize: '0.9rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '1px' }}>
+              Select your clearance level to proceed.
+            </p>
 
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', position: 'relative', zIndex: 5 }}>
               <button className="btn-primary" onClick={() => navigateToReview("pre")} style={{ padding: '20px', fontSize: '1.2rem', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '4px' }}>
-                <span>Pre-Game Review</span>
-                <span style={{ fontSize: '0.9rem', fontWeight: 'normal', opacity: 0.8 }}>(Spoiler-Free Impressions)</span>
+                <span style={{ fontWeight: 800 }}>[ PRE-GAME REVIEW ]</span>
+                <span style={{ fontSize: '0.8rem', fontWeight: 'normal', opacity: 0.8 }}>SPOILER-FREE IMPRESSIONS</span>
               </button>
               <button className="btn-outline" onClick={() => navigateToReview("post")} style={{ padding: '20px', fontSize: '1.2rem', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '4px', borderColor: 'var(--secondary)' }}>
-                <span style={{ color: 'var(--secondary)' }}>Post-Game Analysis</span>
-                <span style={{ fontSize: '0.9rem', fontWeight: 'normal', opacity: 0.8, color: 'var(--text-muted)' }}>(Deep Dive & Total Ratings)</span>
+                <span style={{ color: 'var(--secondary)', fontWeight: 800 }}>[ POST-GAME ANALYSIS ]</span>
+                <span style={{ fontSize: '0.8rem', fontWeight: 'normal', opacity: 0.8, color: 'var(--text-muted)' }}>DEEP DIVE & TOTAL RATINGS</span>
               </button>
             </div>
           </div>
