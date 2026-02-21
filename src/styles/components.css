@@ -80,6 +80,13 @@
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
 }
 
+.hub-toggle-link {
+    z-index: 2;
+    flex: 1 1 0%;
+    text-decoration: none;
+    display: flex;
+}
+
 .hub-toggle-btn {
     background: transparent;
     border: none;
@@ -91,6 +98,12 @@
     position: relative;
     z-index: 2;
     transition: color 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    white-space: nowrap;
+    width: 100%;
+    text-align: center;
 }
 
 .hub-toggle-btn.active {

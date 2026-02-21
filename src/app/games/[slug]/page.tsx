@@ -54,13 +54,13 @@ export default async function GameHubPage(props: {
                     <div className="hub-toggle-wrapper">
                         <div className={`hub-toggle-container mode-${segment}`}>
                             <div className="hub-toggle-slider" />
-                            <Link href={`?mode=pre`} scroll={false} style={{ zIndex: 2, flex: 1, textDecoration: 'none' }}>
-                                <button className={`hub-toggle-btn ${segment === "pre" ? "active" : ""}`} style={{ width: '100%' }}>
+                            <Link href={`?mode=pre`} scroll={false} className="hub-toggle-link">
+                                <button className={`hub-toggle-btn ${segment === "pre" ? "active" : ""}`}>
                                     Pre-Game (Spoiler-Free)
                                 </button>
                             </Link>
-                            <Link href={`?mode=post`} scroll={false} style={{ zIndex: 2, flex: 1, textDecoration: 'none' }}>
-                                <button className={`hub-toggle-btn ${segment === "post" ? "active" : ""}`} style={{ width: '100%' }}>
+                            <Link href={`?mode=post`} scroll={false} className="hub-toggle-link">
+                                <button className={`hub-toggle-btn ${segment === "post" ? "active" : ""}`}>
                                     Post-Game (Deep Dive)
                                 </button>
                             </Link>
