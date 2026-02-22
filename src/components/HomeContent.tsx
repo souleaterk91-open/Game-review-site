@@ -215,7 +215,7 @@ export default function HomeContent({ initialGames }: { initialGames: GameData[]
                                             ★ {dailyPick.postReview?.totalScore || 'N/A'}
                                         </div>
                                     </div>
-                                    <p style={{ color: 'var(--text-muted)', fontSize: '1rem', lineHeight: 1.6, maxWidth: '90%' }}>
+                                    <p className="review-description" style={{ color: 'var(--text-muted)', fontSize: '1rem', lineHeight: 1.6, maxWidth: '90%' }}>
                                         {dailyPick.storyline}
                                     </p>
                                 </div>

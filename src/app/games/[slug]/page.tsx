@@ -26,8 +26,13 @@ export default async function GameHubPage(props: {
         notFound();
     }
 
+    // Determine the theme based on the slug
+    const themeClass = slug.includes('cyberpunk') ? 'theme-cyberpunk' :
+        slug.includes('elden') ? 'theme-eldenring' :
+            slug.includes('god-of-war') ? 'theme-gowr' : 'theme-default';
+
     return (
-        <div className={`game-hub-page theme-default`}>
+        <div className={`game-hub-page ${themeClass}`}>
             {/* Hero Header */}
             <header className="game-hero">
                 <div className="game-hero-img-container" style={{ position: 'absolute', inset: 0 }}>
@@ -73,8 +78,8 @@ export default async function GameHubPage(props: {
                 {segment === "pre" ? (
                     <div className="fade-in">
                         <section className="glass-panel info-card">
-                            <h2>General Storyline</h2>
-                            <p>{game.storyline}</p>
+                            <h2>Game Overview</h2>
+                            <p className="review-description">{game.storyline}</p>
                         </section>
 
                         <div className="recommendation-grid">
